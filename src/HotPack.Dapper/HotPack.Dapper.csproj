@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <BaseOutputPath>C:\git\HotPack\dist</BaseOutputPath>
-    <Version>2024.9.6.1</Version>
+    <Version>2024.10.17.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

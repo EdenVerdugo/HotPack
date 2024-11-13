@@ -1,69 +1,67 @@
-﻿using Dapper;
-using HotPack.Classes;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotPack.Dapper
+namespace HotPack.Database
 {
     public class ConexionParameters
     {
         private List<ConexionParameter> Parameters { get; set; } = new List<ConexionParameter>();
 
-        private DynamicParameters dapperParameters;
+        public string[] ParameterNames
+        {
+            get
+            {
+                return Parameters.Select(x => x.Name).ToArray();
+            }
+        }
 
         public ConexionParameters()
         {
             Parameters = new List<ConexionParameter>();
-            dapperParameters = new DynamicParameters();
-        }        
+            
+        }
 
         public ConexionParameters Add(string name, ConexionDbType type, object value)
         {
-            Parameters.Add(new ConexionParameter(name, type, value));
-            dapperParameters.Add(name, value, (DbType)type);
+            Parameters.Add(new ConexionParameter(name, type, value));            
 
             return this;
         }
         public ConexionParameters Add(string name, ConexionDbType type, ParameterDirection direction)
         {
-            Parameters.Add(new ConexionParameter(name, type, null!, type == ConexionDbType.VarChar || type == ConexionDbType.NVarChar ? 300 : 0, direction));
-            dapperParameters.Add(name, null, (DbType)type, direction: direction);
+            Parameters.Add(new ConexionParameter(name, type, null!, type == ConexionDbType.VarChar || type == ConexionDbType.NVarChar ? 300 : 0, direction));            
 
             return this;
         }
         public ConexionParameters Add(string name, ConexionDbType type, ParameterDirection direction, int size)
         {
-            Parameters.Add(new ConexionParameter(name, type, null!, size, direction));
-            dapperParameters.Add(name, null, (DbType)type, direction, size);
+            Parameters.Add(new ConexionParameter(name, type, null!, size, direction));            
 
             return this;
-        }           
+        }
         public ConexionParameters Add(ConexionParameter parameter)
         {
             Parameters.Add(parameter);
-            dapperParameters.Add(parameter.Name, parameter.Value, parameter.Type, parameter.Direction, parameter.Size);
-
+            
             return this;
         }
 
         public ConexionParameters AddOutput(string name, ConexionDbType type, string bagAlias = "")
         {
             Parameters.Add(new ConexionParameter(name, type, null!, type == ConexionDbType.VarChar || type == ConexionDbType.NVarChar ? 300 : 0, ParameterDirection.Output, bagAlias));
-            dapperParameters.Add(name, dbType: (DbType)type, direction: ParameterDirection.Output, size: type == ConexionDbType.VarChar || type == ConexionDbType.NVarChar ? 300 : 0);
-
+            
             return this;
         }
 
         public ConexionParameters AddOutput(string name, ConexionDbType type, int size, string bagAlias = "")
         {
-            Parameters.Add(new ConexionParameter(name, type, null!, size, ParameterDirection.Output, bagAlias));
-            dapperParameters.Add(name, dbType: (DbType)type, direction: ParameterDirection.Output, size: size);
-            
+            Parameters.Add(new ConexionParameter(name, type, null!, size, ParameterDirection.Output, bagAlias));            
+
             return this;
         }
 
@@ -75,13 +73,30 @@ namespace HotPack.Dapper
         /// <returns></returns>
         public T Get<T>(string name)
         {
-            return dapperParameters.Get<T>(name);
-        }
+            // Verifica si Parameters es null o está vacía
+            if (this.Parameters == null || !this.Parameters.Any())
+            {
+                throw new InvalidOperationException("No hay parámetros disponibles.");
+            }
 
-        public DynamicParameters GetDynamicParameters()
-        {
-            return dapperParameters;
-        }
+            // Usa FirstOrDefault en lugar de Single para evitar excepciones si no hay coincidencias
+            var parameter = this.Parameters.FirstOrDefault(x => x.Name == name);
+
+            if (parameter == null)
+            {
+                throw new KeyNotFoundException($"El parámetro con el nombre '{name}' no fue encontrado.");
+            }
+
+            // Intenta convertir el valor a T de manera segura
+            try
+            {
+                return (T)Convert.ChangeType(parameter.Value!, typeof(T));
+            }
+            catch (InvalidCastException)
+            {
+                throw new InvalidCastException($"No se pudo convertir el valor del parámetro '{name}' al tipo {typeof(T)}.");
+            }
+        }       
 
         public List<ConexionParameter> GetParameters()
         {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotPack.Dapper
+namespace HotPack.Database
 {
     public class ConexionParametersBuilder
     {
@@ -13,7 +13,7 @@ namespace HotPack.Dapper
 
         public ConexionParametersBuilder()
         {
-            
+
         }
 
         public void AddDefaultParam(string name, ConexionDbType type, object value)

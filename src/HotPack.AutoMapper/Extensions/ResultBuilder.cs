@@ -38,6 +38,7 @@ namespace HotPack.AutoMapper.Extensions
             result2.Value = result.Value;
             result2.Message = result.Message;
             result2.Code = result.Code;
+            result2.Bag = result.Bag;
 
             var data = mapper.Map<T>(result.Data);
             result2.Data = data;
@@ -52,6 +53,7 @@ namespace HotPack.AutoMapper.Extensions
             result2.Value = result.Value;
             result2.Message = result.Message;
             result2.Code = result.Code;
+            result2.Bag = result.Bag;
 
             var data = mapper.Map<List<T>>(result.Data);
             result2.Data = data;

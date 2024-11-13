@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotPack.Dapper", "..\HotPac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotPack.Test", "..\HotPack.Test\HotPack.Test.csproj", "{A642122F-44E6-45A3-9A96-9BE26C0F80EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPack.AutoMapper", "..\HotPack.AutoMapper\HotPack.AutoMapper.csproj", "{5EA601A7-A822-4AF5-9154-400A0FCDEEF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotPack.AutoMapper", "..\HotPack.AutoMapper\HotPack.AutoMapper.csproj", "{5EA601A7-A822-4AF5-9154-400A0FCDEEF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPack.AspNetCore", "..\HotPack.AspNetCore\HotPack.AspNetCore.csproj", "{9346C418-A51E-4547-A746-146BFAE13E36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotPack.AspNetCore", "..\HotPack.AspNetCore\HotPack.AspNetCore.csproj", "{9346C418-A51E-4547-A746-146BFAE13E36}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotPack.AspNetCoreTest", "..\HotPack.AspNetCoreTest\HotPack.AspNetCoreTest.csproj", "{A057B689-26AC-4181-8CAF-FA0EEA427BBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPack.Database", "..\HotPack.Database\HotPack.Database.csproj", "{EC09B1F1-DD0A-456A-A46C-D486C6C33C34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{9346C418-A51E-4547-A746-146BFAE13E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9346C418-A51E-4547-A746-146BFAE13E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9346C418-A51E-4547-A746-146BFAE13E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A057B689-26AC-4181-8CAF-FA0EEA427BBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A057B689-26AC-4181-8CAF-FA0EEA427BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A057B689-26AC-4181-8CAF-FA0EEA427BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A057B689-26AC-4181-8CAF-FA0EEA427BBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC09B1F1-DD0A-456A-A46C-D486C6C33C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC09B1F1-DD0A-456A-A46C-D486C6C33C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC09B1F1-DD0A-456A-A46C-D486C6C33C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC09B1F1-DD0A-456A-A46C-D486C6C33C34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

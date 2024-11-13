@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace HotPack.Test
-{
-    internal class TestModel
+{    
+    public class TestModel
     {
+        [XmlAttribute("CodArticulo")]
+        [XmlIgnore]
         public int CodArticulo { get; set; }
+
+        [XmlAttribute("Descripcion")]
         public string Descripcion { get; set; } = null!;
+
+        [XmlAttribute("Precio")]
         public decimal Precio { get; set; }
         public decimal Descuento { get; set; }
         public decimal PrecioOferta { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HotPack.Classes
 {
@@ -14,7 +15,7 @@ namespace HotPack.Classes
         public object? Data { get; set; }
         private string _InfoMessage { get; set; } = string.Empty;
         public int Code { get; set; }
-
+        public Dictionary<string, object> Bag { get; set; } = new Dictionary<string, object>();
         public Result()
         {
 
@@ -54,6 +55,29 @@ namespace HotPack.Classes
             return new Result(ex);
         }
 
+        public Result<M> Cast<M>()
+        {
+            var result = new Result<M>();
+            result.Value = this.Value;
+            result.Message = this.Message;
+            result.Code = this.Code;
+            result.Bag = this.Bag;            
+
+            return result;
+        }
+
+        public Result<M> Cast<M>(M? data)
+        {
+            var result = new Result<M>();
+            result.Value = this.Value;
+            result.Message = this.Message;
+            result.Code = this.Code;
+            result.Bag = this.Bag;
+            result.Data = data;
+
+            return result;
+        }
+
         public string InfoMessage()
         {
             return _InfoMessage;
@@ -67,12 +91,15 @@ namespace HotPack.Classes
         }
     }
 
-    public class Result<T> 
+    public class Result<T>
     {
         public bool Value { get; set; }
         public string Message { get; set; } = string.Empty;
         public T? Data { get; set; }
         public int Code { get; set; }
+
+        //public List<ResultBagItem> Bag { get; set; } = new List<ResultBagItem>();
+        public Dictionary<string, object> Bag { get; set; } = new Dictionary<string, object>();
 
         public Result()
         {
@@ -83,6 +110,7 @@ namespace HotPack.Classes
         {
             this.Value = value;
             this.Message = msg;
+
         }
 
         public Result(bool value, string msg, T data)
@@ -90,13 +118,23 @@ namespace HotPack.Classes
             this.Value = value;
             this.Message = msg;
             this.Data = data;
+
         }
 
         public Result(Exception ex)
         {
             this.Value = false;
             this.Message = ex.Message;
+
         }
+
+        public Result(Result origin)
+        {
+            this.Value = origin.Value;
+            this.Message = origin.Message;
+            this.Code = origin.Code;
+            this.Bag = origin.Bag;
+        }       
 
         public static Result Create(bool value, string msg)
         {
@@ -111,6 +149,29 @@ namespace HotPack.Classes
         public static Result Create(Exception ex)
         {
             return new Result(ex);
+        }
+
+        public Result<M> Cast<M>()
+        {
+            var result = new Result<M>();
+            result.Value = this.Value;
+            result.Message = this.Message;
+            result.Code = this.Code;
+            result.Bag = this.Bag;
+
+            return result;
+        }
+
+        public Result<M> Cast<M>(M? data)
+        {
+            var result = new Result<M>();
+            result.Value = this.Value;
+            result.Message = this.Message;
+            result.Code = this.Code;
+            result.Bag = this.Bag;
+            result.Data = data;
+
+            return result;
         }
 
         /// <summary>
@@ -138,5 +199,25 @@ namespace HotPack.Classes
         {
 
         }
+    }
+
+    //public class ResultList<T,M> : Result<List>
+
+    public class ResultBagItem
+    {
+        public string Key { get; set; } = null!;
+        public object Value { get; set; } = null!;
+
+        public ResultBagItem()
+        {
+
+        }
+
+        public ResultBagItem(string key, object value)
+        {
+            Key = key;
+            Value = value;
+        }
+
     }
 }

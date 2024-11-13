@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotPack.Dapper
+namespace HotPack.Database
 {
     public class ConexionParameter
     {

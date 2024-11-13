@@ -4,10 +4,16 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <BaseOutputPath>C:\git\HotPack\dist</BaseOutputPath>
+    <Version>2024.10.17.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HotPack\HotPack.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App\" />
   </ItemGroup>
 
 </Project>

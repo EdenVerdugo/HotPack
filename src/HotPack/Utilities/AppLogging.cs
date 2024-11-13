@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotPack.AspNetCore
+namespace HotPack.Utilities
 {
-    public class OKResultList<T> 
+    internal class AppLogging
     {
-        public OKResultList()
-        {
-            
-        }
     }
 }
