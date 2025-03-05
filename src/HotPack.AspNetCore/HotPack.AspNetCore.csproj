@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HotPack\HotPack.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="App\" />
   </ItemGroup>
 
